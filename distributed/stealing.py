@@ -129,6 +129,13 @@ class WorkStealing(SchedulerPlugin):
         if not ts.dependencies:  # no dependencies fast path
             return 0, 0
 
+        if ts.prefix == 'ground_truth_hourly_histogram':
+            print('STEAL ME')
+            return 0, 0
+
+        if ts.prefix == 'generate_population_activities':
+            return 0, 0
+
         nbytes = sum(dep.get_nbytes() for dep in ts.dependencies)
 
         transfer_time = nbytes / self.scheduler.bandwidth + LATENCY
