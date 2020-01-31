@@ -28,7 +28,7 @@
         <td> </td>
         {% end %}
         <td> <a href="../logs/{{ url_escape(ws.address) }}.html">logs</a></td>
-        <td> {{ format_time(time.now() - ws.last_seen) }} </td>
+        <td> {{ format_time(time() - ws.last_seen) }} </td>
     </tr>
     {% end %}
   </table>
