@@ -4655,8 +4655,11 @@ class Scheduler(ServerNode):
                 # Remove TaskGroup if all tasks are in the forgotten state
                 tg = ts.group
                 if not any(tg.states.get(s) for s in ALL_TASK_STATES):
-                    ts.prefix.groups.remove(tg)
-                    del self.task_groups[tg.name]
+                    try:  # TODO temporary workaround https://github.com/dask/distributed/issues/3465
+                        ts.prefix.groups.remove(tg)
+                        del self.task_groups[tg.name]
+                    except (KeyError, ValueError):
+                        pass
 
             return recommendations
         except Exception as e:
