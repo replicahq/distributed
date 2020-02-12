@@ -15,10 +15,6 @@ body {
   padding-bottom: 1rem;
 }
 
-tr.warning {
-  background-color: #e57373;
-}
-
 .navbar {
   position: fixed;
   top: 0;
